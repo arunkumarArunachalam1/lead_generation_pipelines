@@ -7,7 +7,13 @@
     <extended_description/>
     <pipeline_version/>
     <pipeline_type>Normal</pipeline_type>
+    <pipeline_status>0</pipeline_status>
     <parameters>
+      <parameter>
+        <name>categories</name>
+        <default_value/>
+        <description/>
+      </parameter>
     </parameters>
     <capture_transform_performance>N</capture_transform_performance>
     <transform_performance_capturing_delay>1000</transform_performance_capturing_delay>
@@ -20,11 +26,6 @@
   <notepads>
   </notepads>
   <order>
-    <hop>
-      <from>CSV file input</from>
-      <to>Select values</to>
-      <enabled>Y</enabled>
-    </hop>
     <hop>
       <from>Select values</from>
       <to>String operations</to>
@@ -41,13 +42,23 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Add constants</from>
-      <to>Insert / update</to>
+      <from>Sort rows</from>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Sort rows</from>
-      <to>Add constants</to>
+      <from>CSV file input</from>
+      <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>Get variables</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get variables</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -74,8 +85,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>1024</xloc>
-      <yloc>128</yloc>
+      <xloc>976</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -89,7 +100,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/decoders/Pictures/HOP/items.csv</filename>
+    <filename>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/items.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -261,8 +272,35 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>144</xloc>
-      <yloc>128</yloc>
+      <xloc>96</xloc>
+      <yloc>160</yloc>
+    </GUI>
+  </transform>
+  <transform>
+    <name>Get variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <length>-1</length>
+        <name>categories</name>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <variable>${categories}</variable>
+      </field>
+    </fields>
+    <attributes/>
+    <GUI>
+      <xloc>1104</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -350,8 +388,8 @@
 </valuetypes>
     <attributes/>
     <GUI>
-      <xloc>656</xloc>
-      <yloc>128</yloc>
+      <xloc>640</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -387,6 +425,11 @@
         <condition>=</condition>
         <field>project_summary</field>
         <name>project_summary</name>
+      </key>
+      <key>
+        <condition>=</condition>
+        <field>categories</field>
+        <name>categories</name>
       </key>
       <schema>rawdata</schema>
       <table>clutch_reviews</table>
@@ -460,12 +503,17 @@
         <rename>source</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>categories</name>
+        <rename>categories</rename>
+        <update>N</update>
+      </value>
     </lookup>
     <update_bypassed>N</update_bypassed>
     <attributes/>
     <GUI>
-      <xloc>1200</xloc>
-      <yloc>128</yloc>
+      <xloc>1248</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -549,8 +597,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>336</xloc>
-      <yloc>128</yloc>
+      <xloc>320</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -581,8 +629,8 @@
     <unique_rows>N</unique_rows>
     <attributes/>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>128</yloc>
+      <xloc>784</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform>
@@ -756,8 +804,8 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>128</yloc>
+      <xloc>464</xloc>
+      <yloc>160</yloc>
     </GUI>
   </transform>
   <transform_error_handling>

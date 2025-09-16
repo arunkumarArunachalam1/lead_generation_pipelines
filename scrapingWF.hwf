@@ -11,7 +11,22 @@
   <modified_user>-</modified_user>
   <modified_date>2025/08/28 14:59:40.689</modified_date>
   <parameters>
-    </parameters>
+    <parameter>
+      <name>MAX_PAGES</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>START_URL</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>categories</name>
+      <default_value/>
+      <description/>
+    </parameter>
+  </parameters>
   <actions>
     <action>
       <name>Start</name>
@@ -28,8 +43,8 @@
       <schedulerType>1</schedulerType>
       <weekDay>1</weekDay>
       <parallel>N</parallel>
-      <xloc>144</xloc>
-      <yloc>192</yloc>
+      <xloc>128</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -46,6 +61,10 @@
       <filename>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/hop/csvTodb.hpl</filename>
       <loglevel>Basic</loglevel>
       <parameters>
+        <parameter>
+          <name>categories</name>
+          <value>${categories}</value>
+        </parameter>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <params_from_previous>N</params_from_previous>
@@ -55,7 +74,7 @@
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
       <xloc>640</xloc>
-      <yloc>192</yloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -66,8 +85,8 @@
       <fail_if_file_not_exists>N</fail_if_file_not_exists>
       <filename>/home/decoders/Pictures/HOP/Lead_20250903.xls</filename>
       <parallel>N</parallel>
-      <xloc>976</xloc>
-      <yloc>192</yloc>
+      <xloc>1088</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -94,7 +113,7 @@ signal_generator clutch scrape \
       <work_directory>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/hop</work_directory>
       <parallel>N</parallel>
       <xloc>480</xloc>
-      <yloc>192</yloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -106,24 +125,29 @@ signal_generator clutch scrape \
         <field>
           <variable_name>START_URL</variable_name>
           <variable_type>JVM</variable_type>
-          <variable_value>https://clutch.co/it-services/staff-augmentation</variable_value>
-        </field>
-        <field>
-          <variable_name>OUT_PATH</variable_name>
-          <variable_type>JVM</variable_type>
-          <variable_value>/home/decoders/Pictures/HOP/items.csv</variable_value>
+          <variable_value>${START_URL}</variable_value>
         </field>
         <field>
           <variable_name>MAX_PAGES</variable_name>
           <variable_type>JVM</variable_type>
-          <variable_value>1</variable_value>
+          <variable_value>${MAX_PAGES}</variable_value>
+        </field>
+        <field>
+          <variable_name>categories</variable_name>
+          <variable_type>JVM</variable_type>
+          <variable_value>${categories}</variable_value>
+        </field>
+        <field>
+          <variable_name>OUT_PATH</variable_name>
+          <variable_type>JVM</variable_type>
+          <variable_value>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/items.csv</variable_value>
         </field>
       </fields>
       <file_variable_type>CURRENT_WORKFLOW</file_variable_type>
       <replacevars>Y</replacevars>
       <parallel>N</parallel>
-      <xloc>320</xloc>
-      <yloc>192</yloc>
+      <xloc>304</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -132,8 +156,8 @@ signal_generator clutch scrape \
       <type>SUCCESS</type>
       <attributes/>
       <parallel>N</parallel>
-      <xloc>1136</xloc>
-      <yloc>192</yloc>
+      <xloc>1248</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -158,19 +182,12 @@ signal_generator clutch scrape \
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>816</xloc>
-      <yloc>192</yloc>
+      <xloc>832</xloc>
+      <yloc>240</yloc>
       <attributes_hac/>
     </action>
   </actions>
   <hops>
-    <hop>
-      <from>Scraping_Script 2</from>
-      <to>csvTodb.hpl</to>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
     <hop>
       <from>Delete file</from>
       <to>Success</to>
@@ -186,13 +203,6 @@ signal_generator clutch scrape \
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>Set variables</from>
-      <to>Scraping_Script 2</to>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>csvTodb.hpl</from>
       <to>rawtable-master.hpl</to>
       <enabled>Y</enabled>
@@ -202,6 +212,20 @@ signal_generator clutch scrape \
     <hop>
       <from>rawtable-master.hpl</from>
       <to>Delete file</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>Scraping_Script 2</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Scraping_Script 2</from>
+      <to>csvTodb.hpl</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>
