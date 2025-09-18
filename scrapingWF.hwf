@@ -22,6 +22,11 @@
       <description/>
     </parameter>
     <parameter>
+      <name>TimeStamp</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
       <name>categories</name>
       <default_value/>
       <description/>
@@ -43,8 +48,8 @@
       <schedulerType>1</schedulerType>
       <weekDay>1</weekDay>
       <parallel>N</parallel>
-      <xloc>128</xloc>
-      <yloc>240</yloc>
+      <xloc>144</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -65,6 +70,10 @@
           <name>categories</name>
           <value>${categories}</value>
         </parameter>
+        <parameter>
+          <name>OUT_PATH</name>
+          <value>${OUT_PATH}</value>
+        </parameter>
         <pass_all_parameters>Y</pass_all_parameters>
       </parameters>
       <params_from_previous>N</params_from_previous>
@@ -73,8 +82,8 @@
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>640</xloc>
-      <yloc>240</yloc>
+      <xloc>672</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -85,8 +94,8 @@
       <fail_if_file_not_exists>N</fail_if_file_not_exists>
       <filename>/home/decoders/Pictures/HOP/Lead_20250903.xls</filename>
       <parallel>N</parallel>
-      <xloc>1088</xloc>
-      <yloc>240</yloc>
+      <xloc>1072</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -112,8 +121,8 @@ signal_generator clutch scrape \
       <set_logfile>N</set_logfile>
       <work_directory>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/hop</work_directory>
       <parallel>N</parallel>
-      <xloc>480</xloc>
-      <yloc>240</yloc>
+      <xloc>512</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -140,14 +149,19 @@ signal_generator clutch scrape \
         <field>
           <variable_name>OUT_PATH</variable_name>
           <variable_type>JVM</variable_type>
-          <variable_value>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/items.csv</variable_value>
+          <variable_value>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/items_${categories}_${TimeStamp}.csv</variable_value>
+        </field>
+        <field>
+          <variable_name>TimeStamp</variable_name>
+          <variable_type>JVM</variable_type>
+          <variable_value>${current_datetime}</variable_value>
         </field>
       </fields>
       <file_variable_type>CURRENT_WORKFLOW</file_variable_type>
       <replacevars>Y</replacevars>
       <parallel>N</parallel>
-      <xloc>304</xloc>
-      <yloc>240</yloc>
+      <xloc>320</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -156,8 +170,8 @@ signal_generator clutch scrape \
       <type>SUCCESS</type>
       <attributes/>
       <parallel>N</parallel>
-      <xloc>1248</xloc>
-      <yloc>240</yloc>
+      <xloc>1264</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
     <action>
@@ -182,8 +196,8 @@ signal_generator clutch scrape \
       <set_logfile>N</set_logfile>
       <wait_until_finished>Y</wait_until_finished>
       <parallel>N</parallel>
-      <xloc>832</xloc>
-      <yloc>240</yloc>
+      <xloc>848</xloc>
+      <yloc>304</yloc>
       <attributes_hac/>
     </action>
   </actions>
@@ -194,13 +208,6 @@ signal_generator clutch scrape \
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Start</from>
-      <to>Set variables</to>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>csvTodb.hpl</from>
@@ -226,6 +233,13 @@ signal_generator clutch scrape \
     <hop>
       <from>Scraping_Script 2</from>
       <to>csvTodb.hpl</to>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Start</from>
+      <to>Set variables</to>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>Y</unconditional>

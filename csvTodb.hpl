@@ -10,6 +10,11 @@
     <pipeline_status>0</pipeline_status>
     <parameters>
       <parameter>
+        <name>OUT_PATH</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
         <name>categories</name>
         <default_value/>
         <description/>
@@ -100,7 +105,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <filename>/home/decoders/Pictures/HOP/apache-hop-client-2.15.0/items.csv</filename>
+    <filename>${OUT_PATH}</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -597,7 +602,7 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>304</xloc>
       <yloc>160</yloc>
     </GUI>
   </transform>
