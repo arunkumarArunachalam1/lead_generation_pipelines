@@ -30,6 +30,11 @@
         <description>String</description>
       </parameter>
       <parameter>
+        <name>Timestamp</name>
+        <default_value/>
+        <description/>
+      </parameter>
+      <parameter>
         <name>source</name>
         <default_value/>
         <description>String</description>
@@ -72,28 +77,18 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Formula</from>
-      <to>Merge join 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Get variables</from>
-      <to>Merge join 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get system info</from>
-      <to>Merge join 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 3</from>
       <to>Select values 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Select values 2</from>
       <to>Formula</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Formula</from>
+      <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -111,8 +106,7 @@
     <formulas>
       <formula>
         <field_name>Filepath</field_name>
-        <formula>"/home/decoders/Pictures/HOP/sales_signal-" &amp; [source] &amp; "-" &amp; [Categories] &amp; "_" &amp; [Time] &amp; ".xls"
-</formula>
+        <formula>"/home/decoders/Pictures/HOP/sales_signal-" &amp; [source] &amp; "-" &amp; [Categories] &amp; "-" &amp; [Timestamp] &amp; ".xls"</formula>
         <set_na>N</set_na>
         <value_length>-1</value_length>
         <value_precision>-1</value_precision>
@@ -121,31 +115,8 @@
     </formulas>
     <attributes/>
     <GUI>
-      <xloc>592</xloc>
-      <yloc>352</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Get system info</name>
-    <type>SystemInfo</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>Time</name>
-        <type>system date (variable)</type>
-      </field>
-    </fields>
-    <attributes/>
-    <GUI>
-      <xloc>128</xloc>
-      <yloc>352</yloc>
+      <xloc>576</xloc>
+      <yloc>368</yloc>
     </GUI>
   </transform>
   <transform>
@@ -197,6 +168,14 @@
         <trim_type>none</trim_type>
         <type>String</type>
         <variable>${source}</variable>
+      </field>
+      <field>
+        <length>-1</length>
+        <name>Timestamp</name>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <type>String</type>
+        <variable>${Timestamp}</variable>
       </field>
     </fields>
     <attributes/>
@@ -302,30 +281,6 @@
     <GUI>
       <xloc>608</xloc>
       <yloc>256</yloc>
-    </GUI>
-  </transform>
-  <transform>
-    <name>Merge join 3</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>FULL OUTER</join_type>
-    <keys_1>
-</keys_1>
-    <keys_2>
-</keys_2>
-    <transform1>Get variables</transform1>
-    <transform2>Get system info</transform2>
-    <attributes/>
-    <GUI>
-      <xloc>336</xloc>
-      <yloc>352</yloc>
     </GUI>
   </transform>
   <transform>
@@ -619,12 +574,12 @@
       </field>
       <field>
         <length>-2</length>
-        <name>Time</name>
+        <name>Filepath</name>
         <precision>-2</precision>
       </field>
       <field>
         <length>-2</length>
-        <name>Filepath</name>
+        <name>Timestamp</name>
         <precision>-2</precision>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -674,7 +629,7 @@
       </field>
       <field>
         <length>-2</length>
-        <name>Time</name>
+        <name>Timestamp</name>
         <precision>-2</precision>
       </field>
       <meta>
@@ -733,13 +688,12 @@
         <type>String</type>
       </meta>
       <meta>
-        <conversion_mask>yyyyMMdd_HHmmss</conversion_mask>
-        <date_format_lenient>Y</date_format_lenient>
+        <date_format_lenient>N</date_format_lenient>
         <length>-2</length>
         <lenient_string_to_number>N</lenient_string_to_number>
-        <name>Time</name>
+        <name>Timestamp</name>
         <precision>-2</precision>
-        <rename>Time</rename>
+        <rename>Timestamp</rename>
         <roundingType>half_even</roundingType>
         <storage_type/>
         <type>String</type>
@@ -748,7 +702,7 @@
     </fields>
     <attributes/>
     <GUI>
-      <xloc>480</xloc>
+      <xloc>400</xloc>
       <yloc>352</yloc>
     </GUI>
   </transform>

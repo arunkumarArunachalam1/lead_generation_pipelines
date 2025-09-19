@@ -27,6 +27,21 @@
       <description>String</description>
     </parameter>
     <parameter>
+      <name>DO_NOT_WAIT</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>INTERVAL_MINUTES</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>INTERVAL_SECONDS</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
       <name>Limit</name>
       <default_value/>
       <description/>
@@ -35,6 +50,16 @@
       <name>TO</name>
       <default_value/>
       <description>String</description>
+    </parameter>
+    <parameter>
+      <name>TYPE</name>
+      <default_value/>
+      <description/>
+    </parameter>
+    <parameter>
+      <name>Timestamp</name>
+      <default_value/>
+      <description/>
     </parameter>
     <parameter>
       <name>source</name>
@@ -49,13 +74,13 @@
       <type>SPECIAL</type>
       <attributes/>
       <DayOfMonth>1</DayOfMonth>
-      <doNotWaitOnFirstExecution>N</doNotWaitOnFirstExecution>
+      <doNotWaitOnFirstExecution>Y</doNotWaitOnFirstExecution>
       <hour>13</hour>
-      <intervalMinutes>60</intervalMinutes>
+      <intervalMinutes>1</intervalMinutes>
       <intervalSeconds>0</intervalSeconds>
       <minutes>0</minutes>
       <repeat>N</repeat>
-      <schedulerType>2</schedulerType>
+      <schedulerType>1</schedulerType>
       <weekDay>1</weekDay>
       <parallel>N</parallel>
       <xloc>304</xloc>
